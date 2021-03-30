@@ -1,17 +1,49 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React, { lazy, Suspense } from "react";
+import ReactDOM from "react-dom";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+import { Provider } from "react-redux";
+import logger from "redux-logger";
+import { createStore, compose, applyMiddleware } from "redux";
+import reducer from "./reducers";
+import "regenerator-runtime/runtime";
+import "core-js/stable";
+
+import thunk from "redux-thunk";
+
+import { ErrorBoundary } from "react-error-boundary";
+import ErrorFallback from "../src/components/constants/ErrorBoundary";
+import LoadingScreen from "./components/constants/LoadingScreen";
+import "./styles/styles.scss";
+
+const AppRouter = lazy(() => import("./routes/AppRouter"));
+const HomeScreen = lazy(() => import("./components/HomeScreen"));
+
+const initialState = {
+	favoritePokemons: [],
+	searchButtonState: false,
+	uid: null,
+	name: null,
+	photo: null,
+	headerLoading: true,
+	pokedexLoading: true,
+};
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(
+	reducer,
+	initialState,
+	composeEnhancers(applyMiddleware(thunk, logger))
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+ReactDOM.render(
+	<ErrorBoundary FallbackComponent={ErrorFallback}>
+		<Suspense fallback={<LoadingScreen />}>
+			<Provider store={store}>
+				<AppRouter>
+					<HomeScreen />
+				</AppRouter>
+			</Provider>
+		</Suspense>
+	</ErrorBoundary>,
+	document.getElementById("root")
+);
