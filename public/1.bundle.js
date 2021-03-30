@@ -512,7 +512,7 @@ var Pokedex = function Pokedex(props) {
     className: "pokedex__img"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_lazy_load_image_component__WEBPACK_IMPORTED_MODULE_3__["LazyLoadImage"], {
     effect: "blur",
-    src: "pokemon/".concat(id, ".png"),
+    src: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/".concat(id, ".png"),
     alt: ""
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "pokedex__title"

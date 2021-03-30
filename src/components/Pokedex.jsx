@@ -62,7 +62,11 @@ const Pokedex = (props) => {
 					}}
 				>
 					<div className="pokedex__img">
-						<LazyLoadImage effect="blur" src={`pokemon/${id}.png`} alt="" />
+						<LazyLoadImage
+							effect="blur"
+							src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`}
+							alt=""
+						/>
 					</div>
 					<h3 className="pokedex__title">{pokemonName}</h3>
 				</div>
