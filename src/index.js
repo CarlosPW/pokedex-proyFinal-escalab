@@ -16,7 +16,6 @@ import LoadingScreen from "./components/constants/LoadingScreen";
 import "./styles/styles.scss";
 
 const AppRouter = lazy(() => import("./routes/AppRouter"));
-const HomeScreen = lazy(() => import("./components/HomeScreen"));
 
 const initialState = {
 	favoritePokemons: [],
@@ -39,9 +38,7 @@ ReactDOM.render(
 	<ErrorBoundary FallbackComponent={ErrorFallback}>
 		<Suspense fallback={<LoadingScreen />}>
 			<Provider store={store}>
-				<AppRouter>
-					<HomeScreen />
-				</AppRouter>
+				<AppRouter />
 			</Provider>
 		</Suspense>
 	</ErrorBoundary>,

@@ -5,7 +5,7 @@ import { clearPokemonsLogout, startGoogleLogin, startLogout } from "../actions";
 
 import PokemonImage from "./../assets/img/img_login/imgPokemon_login.png";
 
-export const LoginScreen = () => {
+const LoginScreen = () => {
 	const { push } = useHistory();
 
 	const dispatch = useDispatch();
@@ -74,3 +74,5 @@ export const LoginScreen = () => {
 		</div>
 	);
 };
+
+export default LoginScreen;
